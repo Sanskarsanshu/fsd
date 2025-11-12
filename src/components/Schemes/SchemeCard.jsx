@@ -1,30 +1,62 @@
 import React from 'react';
+import { useTheme } from '../../context/ThemeContext';
 
 const SchemeCard = ({ scheme, index, onLearnMore }) => {
+  const { theme } = useTheme();
+
   return (
     <div
-      className="bg-white rounded-2xl shadow-lg overflow-hidden card-hover animate-slideUp"
-      style={{ animationDelay: `${index * 0.1}s` }}
+      className={`rounded-xl shadow-xl overflow-hidden transition-all duration-300 hover:scale-105 ${
+        theme === 'dark' ? 'bg-zinc-900' : 'bg-white'
+      }`}
+      style={{ animation: `slideUp 0.5s ease-out ${index * 0.1}s backwards` }}
     >
-      <div className="bg-gradient-to-r from-emerald-400 to-teal-500 p-6 text-white">
-        <h3 className="text-xl font-bold mb-2">{scheme.title}</h3>
-        <p className="text-emerald-50 text-sm">{scheme.description}</p>
+      {/* Header */}
+      <div className="bg-gradient-to-r from-emerald-500 to-teal-600 p-4 sm:p-5 text-white">
+        <h3 className="text-base sm:text-lg font-bold mb-1">
+          {scheme.title}
+        </h3>
+        <p className="text-xs sm:text-sm text-white/90">
+          {scheme.description}
+        </p>
       </div>
 
-      <div className="p-6 space-y-4">
+      {/* Content */}
+      <div className="p-4 sm:p-5 space-y-3">
+        {/* Eligibility */}
         <div>
-          <p className="text-xs text-gray-600 font-semibold mb-1">Eligibility</p>
-          <p className="text-gray-900 font-medium">{scheme.eligibility}</p>
+          <p className={`text-xs font-bold uppercase mb-1 ${
+            theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+          }`}>
+            Eligibility
+          </p>
+          <p className={`text-sm font-semibold ${
+            theme === 'dark' ? 'text-white' : 'text-gray-900'
+          }`}>
+            {scheme.eligibility}
+          </p>
         </div>
 
-        <div>
-          <p className="text-xs text-gray-600 font-semibold mb-1">Amount</p>
-          <p className="text-2xl font-bold text-emerald-600">{scheme.amount}</p>
+        {/* Amount */}
+        <div className={`rounded-lg p-3 ${
+          theme === 'dark' 
+            ? 'bg-emerald-900/20 border border-emerald-500/30' 
+            : 'bg-emerald-50 border border-emerald-200'
+        }`}>
+          <p className={`text-xs font-bold uppercase mb-1 ${
+            theme === 'dark' ? 'text-emerald-400' : 'text-emerald-700'
+          }`}>
+            Amount
+          </p>
+          <p className="text-lg sm:text-xl font-black text-emerald-600">
+            {scheme.amount}
+          </p>
         </div>
 
+        {/* Button */}
         <button
           onClick={onLearnMore}
-          className="w-full py-2 bg-emerald-500 text-white font-semibold rounded-lg hover:bg-emerald-600 transition-colors"
+          className="w-full py-2.5 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all text-sm"
         >
           Learn More
         </button>

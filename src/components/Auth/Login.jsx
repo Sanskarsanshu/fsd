@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
+import { useTheme } from '../../context/ThemeContext';
 
 const Login = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const [formData, setFormData] = useState({
     email: 'demo@farmer.com',
     password: 'password123',
@@ -12,39 +14,10 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [focused, setFocused] = useState(null);
-  const [particles, setParticles] = useState([]);
-  const [circles, setCircles] = useState([]);
-
-  // Generate particles on mount
-  useEffect(() => {
-    const newParticles = Array.from({ length: 50 }, (_, i) => ({
-      id: i,
-      left: Math.random() * 100,
-      top: Math.random() * 100,
-      size: Math.random() * 5 + 1,
-      duration: Math.random() * 5 + 3,
-      delay: Math.random() * 3,
-      opacity: Math.random() * 0.5 + 0.2,
-    }));
-    setParticles(newParticles);
-
-    const newCircles = Array.from({ length: 8 }, (_, i) => ({
-      id: i,
-      left: Math.random() * 100,
-      top: Math.random() * 100,
-      size: Math.random() * 150 + 100,
-      duration: Math.random() * 6 + 4,
-      delay: Math.random() * 2,
-    }));
-    setCircles(newCircles);
-  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
     setError('');
   };
 
@@ -79,749 +52,206 @@ const Login = () => {
     }, 1000);
   };
 
-  // All keyframe animations in one style tag
   const keyframeStyles = `
-    @keyframes floatParticle {
-      0% {
-        transform: translateY(100vh) translateX(0) scale(1) rotate(0deg);
-        opacity: 0;
-      }
-      10% {
-        opacity: 1;
-      }
-      90% {
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-100vh) translateX(150px) scale(0.5) rotate(360deg);
-        opacity: 0;
-      }
+    @keyframes slideIn {
+      0% { opacity: 0; transform: translateX(-30px); }
+      100% { opacity: 1; transform: translateX(0); }
     }
-
-    @keyframes floatOrbX {
-      0%, 100% { 
-        transform: translateX(0) translateY(0) scale(1);
-      }
-      33% { 
-        transform: translateX(30px) translateY(-20px) scale(1.1);
-      }
-      66% { 
-        transform: translateX(-30px) translateY(20px) scale(0.9);
-      }
+    @keyframes slideInRight {
+      0% { opacity: 0; transform: translateX(30px); }
+      100% { opacity: 1; transform: translateX(0); }
     }
-
-    @keyframes floatOrbY {
-      0%, 100% { 
-        transform: translateY(0) translateX(0) scale(1);
-      }
-      25% { 
-        transform: translateY(-35px) translateX(15px) scale(1.05);
-      }
-      50% { 
-        transform: translateY(0) translateX(0) scale(1);
-      }
-      75% { 
-        transform: translateY(35px) translateX(-15px) scale(0.95);
-      }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
     }
-
-    @keyframes pulseGlowCard {
-      0%, 100% {
-        box-shadow: 0 0 20px rgba(16, 185, 129, 0.3), 
-                    0 0 40px rgba(16, 185, 129, 0.1),
-                    inset 0 0 30px rgba(255, 255, 255, 0.2);
-        transform: scale(1);
-      }
-      50% {
-        box-shadow: 0 0 40px rgba(16, 185, 129, 0.6), 
-                    0 0 80px rgba(16, 185, 129, 0.3),
-                    inset 0 0 50px rgba(255, 255, 255, 0.3);
-        transform: scale(1.01);
-      }
-    }
-
-    @keyframes slideUpForm {
-      0% {
-        opacity: 0;
-        transform: translateY(40px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes inputFocusGlow {
-      0% {
-        box-shadow: 0 0 0px rgba(16, 185, 129, 0);
-      }
-      100% {
-        box-shadow: 0 0 20px rgba(16, 185, 129, 0.5), 
-                    0 0 40px rgba(16, 185, 129, 0.3),
-                    inset 0 0 10px rgba(16, 185, 129, 0.1);
-      }
-    }
-
-    @keyframes inputFocusTeal {
-      0% {
-        box-shadow: 0 0 0px rgba(13, 148, 136, 0);
-      }
-      100% {
-        box-shadow: 0 0 20px rgba(13, 148, 136, 0.5), 
-                    0 0 40px rgba(13, 148, 136, 0.3),
-                    inset 0 0 10px rgba(13, 148, 136, 0.1);
-      }
-    }
-
-    @keyframes buttonGradientShift {
-      0% {
-        background-position: 0% center;
-      }
-      50% {
-        background-position: 100% center;
-      }
-      100% {
-        background-position: 0% center;
-      }
-    }
-
-    @keyframes slideDownError {
-      0% {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes shimmerWave {
-      0% {
-        background-position: -1000px 0;
-      }
-      100% {
-        background-position: 1000px 0;
-      }
-    }
-
-    @keyframes pulseRing {
-      0% {
-        transform: scale(0.95);
-        opacity: 1;
-        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-      }
-      50% {
-        box-shadow: 0 0 0 20px rgba(16, 185, 129, 0);
-      }
-      100% {
-        transform: scale(1.3);
-        opacity: 0;
-        box-shadow: 0 0 0 40px rgba(16, 185, 129, 0);
-      }
-    }
-
-    @keyframes orbPulse {
-      0%, 100% {
-        filter: blur(60px);
-        opacity: 0.25;
-        transform: scale(1);
-      }
-      50% {
-        filter: blur(80px);
-        opacity: 0.5;
-        transform: scale(1.15);
-      }
-    }
-
-    @keyframes bounceInIcon {
-      0% {
-        opacity: 0;
-        transform: scale(0.3) rotateZ(-90deg);
-      }
-      50% {
-        opacity: 1;
-        transform: scale(1.1);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1) rotateZ(0deg);
-      }
-    }
-
-    @keyframes glowText {
-      0%, 100% {
-        text-shadow: 0 0 10px rgba(16, 185, 129, 0.5),
-                     0 0 20px rgba(6, 182, 212, 0.3);
-      }
-      50% {
-        text-shadow: 0 0 20px rgba(16, 185, 129, 0.8), 
-                     0 0 30px rgba(6, 182, 212, 0.6),
-                     0 0 40px rgba(16, 185, 129, 0.4);
-      }
-    }
-
-    @keyframes gradientBgShift {
-      0% {
-        background-position: 0% 50%;
-      }
-      50% {
-        background-position: 100% 50%;
-      }
-      100% {
-        background-position: 0% 50%;
-      }
-    }
-
-    @keyframes rotateDivider {
-      0% {
-        transform: scaleX(0);
-        opacity: 0;
-      }
-      100% {
-        transform: scaleX(1);
-        opacity: 1;
-      }
-    }
-
-    @keyframes floatCorner {
-      0%, 100% {
-        transform: rotate(45deg) translateY(0) translateX(0);
-        opacity: 0.5;
-      }
-      50% {
-        transform: rotate(45deg) translateY(20px) translateX(-20px);
-        opacity: 0.8;
-      }
-    }
-
-    @keyframes scanLines {
-      0% {
-        transform: translateY(-100%);
-      }
-      100% {
-        transform: translateY(100%);
-      }
-    }
-
-    @keyframes shimmerCard {
-      0% {
-        background-position: -200% 0;
-      }
-      100% {
-        background-position: 200% 0;
-      }
-    }
-
-    @keyframes fadeInUp {
-      0% {
-        opacity: 0;
-        transform: translateY(60px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* Utility Classes */
-    .particle {
-      animation: floatParticle linear infinite;
-    }
-
-    .orb-x {
-      animation: floatOrbX 8s ease-in-out infinite;
-    }
-
-    .orb-y {
-      animation: floatOrbY 10s ease-in-out infinite;
-    }
-
-    .pulse-glow-card {
-      animation: pulseGlowCard 3s ease-in-out infinite;
-    }
-
-    .slide-up {
-      animation: slideUpForm 0.6s ease-out forwards;
-    }
-
-    .input-focus-emerald {
-      animation: inputFocusGlow 0.3s ease-out forwards;
-    }
-
-    .input-focus-teal {
-      animation: inputFocusTeal 0.3s ease-out forwards;
-    }
-
-    .button-gradient {
-      animation: buttonGradientShift 4s ease infinite;
-      background-size: 200% 100%;
-    }
-
-    .slide-down-error {
-      animation: slideDownError 0.5s ease-out forwards;
-    }
-
-    .shimmer {
-      animation: shimmerWave 2s infinite;
-    }
-
-    .shimmer-card {
-      animation: shimmerCard 3s infinite;
-    }
-
-    .bounce-icon {
-      animation: bounceInIcon 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    }
-
-    .glow-text {
-      animation: glowText 2s ease-in-out infinite;
-    }
-
-    .orb-pulse {
-      animation: orbPulse 4s ease-in-out infinite;
-    }
-
-    .pulse-ring {
-      animation: pulseRing 2s ease-out infinite;
-    }
-
-    .rotate-divider {
-      animation: rotateDivider 0.5s ease-out forwards;
-    }
-
-    .float-corner {
-      animation: floatCorner 4s ease-in-out infinite;
-    }
-
-    .fade-in-up {
-      animation: fadeInUp 0.8s ease-out forwards;
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
     }
   `;
 
   return (
-    <div className="relative w-full min-h-screen bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 flex items-center justify-center p-4 overflow-hidden">
+    <div className="fixed inset-0 w-screen h-screen flex overflow-hidden">
       <style>{keyframeStyles}</style>
+{/* 
+      Theme Toggle Button
+      <button
+        onClick={toggleTheme}
+        className="fixed top-4 right-4 z-50 p-2.5 bg-white dark:bg-black backdrop-blur-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-emerald-200 dark:border-emerald-500"
+        aria-label="Toggle theme"
+      >
+        {theme === 'dark' ? <span className="text-xl">☀️</span> : <span className="text-xl">🌙</span>}
+      </button> */}
 
-      {/* ========== BACKGROUND LAYER ========== */}
+      {/* LEFT SIDE - Info Panel */}
+      <div className={`hidden lg:flex lg:w-1/2 ${theme === 'dark' ? 'bg-gradient-to-br from-emerald-600 via-teal-600 to-cyan-600' : 'bg-gradient-to-br from-teal-400 via-emerald-400 to-cyan-400'} p-12 flex-col justify-center items-center relative overflow-hidden transition-all duration-300`}>
+        {/* Decorative Elements */}
+        <div className="absolute top-10 left-10 w-32 h-32 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-20 w-40 h-40 bg-white/10 rounded-full blur-3xl" style={{ animation: 'pulse 2s ease-in-out infinite', animationDelay: '1s' }}></div>
+        
+        {/* Animated Icons */}
+        <div className="absolute top-1/4 right-1/4 text-6xl opacity-20" style={{ animation: 'float 3s ease-in-out infinite' }}>🌿</div>
+        <div className="absolute bottom-1/3 left-1/4 text-5xl opacity-20" style={{ animation: 'float 4s ease-in-out infinite', animationDelay: '1s' }}>🌱</div>
 
-      {/* Animated Gradient Background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Main gradient shift background */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background: 'linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab)',
-            backgroundSize: '400% 400%',
-            animation: 'gradientBgShift 15s ease infinite',
-            opacity: 0.05,
-          }}
-        ></div>
+        {/* Content */}
+        <div className="relative z-10 text-center" style={{ animation: 'slideIn 0.8s ease-out' }}>
+          <div className="mb-8">
+            <h1 className="text-5xl md:text-6xl font-black text-white mb-4 drop-shadow-lg">
+              WELCOME TO<br />KRISHI SAKHI
+            </h1>
+            <div className="h-1 w-32 bg-white/50 mx-auto rounded-full mb-6"></div>
+          </div>
+
+          <p className="text-white/90 text-lg md:text-xl max-w-md mx-auto leading-relaxed mb-8">
+            We want you to feel at home with us! We're here to make sure you have everything you need to feel{' '}
+            <span className="font-bold text-white">comfortable, confident</span>, and ready to make an{' '}
+            <span className="font-bold text-white">impact</span>.
+          </p>
+
+          {/* Logo/Brand */}
+          <div className={`mt-12 ${theme === 'dark' ? 'bg-white' : 'bg-white/95'} rounded-3xl px-8 py-6 inline-block shadow-2xl`}>
+            <div className="flex items-center gap-4">
+              <div className="text-6xl" style={{ animation: 'float 2s ease-in-out infinite' }}>🌾</div>
+              <h2 className="text-4xl font-black bg-gradient-to-r from-teal-600 to-emerald-600 bg-clip-text text-transparent">
+                Krishi Sakhi
+              </h2>
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* Floating Particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {particles.map((particle) => (
-          <div
-            key={`particle-${particle.id}`}
-            className="particle absolute rounded-full bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400"
-            style={{
-              left: `${particle.left}%`,
-              top: `${particle.top}%`,
-              width: `${particle.size}px`,
-              height: `${particle.size}px`,
-              opacity: particle.opacity,
-              animation: `floatParticle ${particle.duration}s linear infinite`,
-              animationDelay: `${particle.delay}s`,
-            }}
-          ></div>
-        ))}
-      </div>
+      {/* RIGHT SIDE - Login Form */}
+      <div className={`w-full lg:w-1/2 relative flex items-center justify-center p-6 ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
+        {/* Background Image Overlay (only in light mode) */}
+        {theme === 'light' && (
+          <>
+            <div className="absolute inset-0 bg-cover bg-center opacity-10" style={{ backgroundImage: `url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1200')` }}></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-white/80 via-emerald-50/50 to-teal-50/50"></div>
+          </>
+        )}
 
-      {/* Animated Background Circles/Orbs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {circles.map((circle) => (
-          <div
-            key={`circle-${circle.id}`}
-            className="absolute rounded-full orb-pulse"
-            style={{
-              left: `${circle.left}%`,
-              top: `${circle.top}%`,
-              width: `${circle.size}px`,
-              height: `${circle.size}px`,
-              background: `radial-gradient(circle, rgba(16, 185, 129, 0.2), transparent 70%)`,
-              animation: `floatOrbX ${circle.duration}s ease-in-out infinite, orbPulse ${circle.duration}s ease-in-out infinite`,
-              animationDelay: `${circle.delay}s`,
-              transform: 'translate(-50%, -50%)',
-            }}
-          ></div>
-        ))}
+        {/* Dark Mode Background Pattern */}
+        {theme === 'dark' && (
+          <div className="absolute inset-0 bg-black">
+            <div className="absolute inset-0 opacity-5" style={{ backgroundImage: `url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1200')`, backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
+          </div>
+        )}
 
-        {/* Large decorative orbs */}
-        <div
-          className="absolute w-96 h-96 rounded-full orb-x orb-pulse"
-          style={{
-            top: '15%',
-            left: '10%',
-            background: 'radial-gradient(circle, rgba(16, 185, 129, 0.3), transparent)',
-          }}
-        ></div>
-
-        <div
-          className="absolute w-96 h-96 rounded-full orb-y orb-pulse"
-          style={{
-            bottom: '15%',
-            right: '10%',
-            background: 'radial-gradient(circle, rgba(6, 182, 212, 0.3), transparent)',
-            animationDelay: '1s',
-          }}
-        ></div>
-
-        <div
-          className="absolute w-72 h-72 rounded-full orb-x orb-pulse"
-          style={{
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            background: 'radial-gradient(circle, rgba(13, 148, 136, 0.2), transparent)',
-            animationDelay: '2s',
-          }}
-        ></div>
-
-        {/* Pulsing rings */}
-        <div
-          className="absolute pulse-ring"
-          style={{
-            top: '25%',
-            left: '15%',
-            width: '100px',
-            height: '100px',
-            borderRadius: '50%',
-            border: '2px solid rgba(16, 185, 129, 0.3)',
-          }}
-        ></div>
-
-        <div
-          className="absolute pulse-ring"
-          style={{
-            bottom: '20%',
-            right: '12%',
-            width: '120px',
-            height: '120px',
-            borderRadius: '50%',
-            border: '2px solid rgba(6, 182, 212, 0.3)',
-            animationDelay: '1s',
-          }}
-        ></div>
-      </div>
-
-      {/* ========== MAIN CONTENT ========== */}
-
-      <div className="relative z-10 w-full max-w-md">
-        {/* Outer glow effect */}
-        <div
-          className="absolute inset-0 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 rounded-3xl opacity-0 blur-3xl transition-opacity duration-500"
-          style={{
-            opacity: focused ? 0.4 : 0.15,
-          }}
-        ></div>
-
-        {/* Main Card */}
-        <div
-          className="relative bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl p-8 border-2 border-white/40 pulse-glow-card overflow-hidden"
-          style={{
-            background: 'linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,255,255,0.92))',
-          }}
-        >
-          {/* Shimmer overlay */}
-          <div
-            className="absolute inset-0 shimmer-card rounded-3xl"
-            style={{
-              background: 'linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.3), rgba(255,255,255,0))',
-              backgroundSize: '200% 100%',
-              pointerEvents: 'none',
-            }}
-          ></div>
-
-          {/* Scan lines effect */}
-          <div
-            className="absolute inset-0 rounded-3xl pointer-events-none"
-            style={{
-              backgroundImage: 'repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 2px)',
-              animation: 'scanLines 8s linear infinite',
-            }}
-          ></div>
-
-          {/* Card Content */}
-          <div className="relative z-10 space-y-6">
-            {/* Header Section */}
-            <div className="text-center space-y-3">
-              <div className="flex justify-center mb-4">
-                <div
-                  className="bounce-icon"
-                  style={{
-                    fontSize: '3.5rem',
-                  }}
-                >
-                  🌾
-                </div>
-              </div>
-
-              <h2
-                className="text-4xl font-black glow-text"
-                style={{
-                  background: 'linear-gradient(135deg, #10b981 0%, #0d9488 50%, #06b6d4 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                  animation: 'slideUpForm 0.6s ease-out forwards',
-                  animationDelay: '0.1s',
-                }}
-              >
+        {/* Form Container */}
+        <div className="relative z-10 w-full max-w-md" style={{ animation: 'slideInRight 0.8s ease-out' }}>
+          <div className={`${theme === 'dark' ? 'bg-zinc-900 border-emerald-500/30' : 'bg-white border-emerald-200'} backdrop-blur-xl rounded-3xl p-8 border-2 shadow-2xl transition-all duration-300`}>
+            {/* Header */}
+            <div className="text-center mb-8">
+              <h2 className={`text-3xl md:text-4xl font-bold mb-2 ${theme === 'dark' ? 'text-emerald-400' : 'text-emerald-600'}`}>
                 Welcome Back
               </h2>
-
-              <p
-                className="text-gray-600 text-sm font-medium"
-                style={{
-                  animation: 'slideUpForm 0.6s ease-out forwards',
-                  animationDelay: '0.2s',
-                }}
-              >
+              <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
                 Login to your farm dashboard
               </p>
             </div>
 
-            {/* Demo Info Box */}
-            <div
-              className="bg-gradient-to-r from-blue-50 to-cyan-50 border-l-4 border-cyan-500 p-4 rounded-lg border-2 border-cyan-100"
-              style={{
-                animation: 'slideUpForm 0.6s ease-out forwards',
-                animationDelay: '0.3s',
-                boxShadow: '0 0 20px rgba(6, 182, 212, 0.1)',
-              }}
-            >
-              <p className="text-xs text-gray-600 font-bold mb-2">
-                <span className="text-cyan-600">✨ Demo Credentials:</span>
-              </p>
-              <div className="space-y-1 text-xs text-gray-700">
-                <p>
-                  📧 <span className="font-mono bg-white/60 px-2 py-1 rounded">demo@farmer.com</span>
-                </p>
-                <p>
-                  🔑 <span className="font-mono bg-white/60 px-2 py-1 rounded">password123</span>
-                </p>
-              </div>
+            {/* Google Login */}
+            <button className={`w-full ${theme === 'dark' ? 'bg-white hover:bg-gray-100' : 'bg-gray-50 hover:bg-gray-100 border border-gray-200'} text-gray-800 font-semibold py-3 px-6 rounded-xl flex items-center justify-center gap-3 mb-6 transition-all duration-300 shadow-md`}>
+              <svg className="w-5 h-5" viewBox="0 0 24 24">
+                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+              </svg>
+              <span>Login with Google</span>
+            </button>
+
+            <div className="flex items-center gap-4 mb-6">
+              <div className={`flex-1 h-px ${theme === 'dark' ? 'bg-gray-700' : 'bg-gray-300'}`}></div>
+              <span className={`text-sm font-medium ${theme === 'dark' ? 'text-gray-500' : 'text-gray-600'}`}>or</span>
+              <div className={`flex-1 h-px ${theme === 'dark' ? 'bg-gray-700' : 'bg-gray-300'}`}></div>
             </div>
 
             {/* Form */}
             <form onSubmit={handleSubmit} className="space-y-5">
-              {/* Email Field */}
-              <div
-                className="space-y-2"
-                style={{
-                  animation: 'slideUpForm 0.6s ease-out forwards',
-                  animationDelay: '0.4s',
-                }}
-              >
-                <label className="block text-sm font-bold text-gray-800">
-                  📧 Email Address
+              <div>
+                <label className={`block text-sm font-semibold mb-2 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                  *Email Address
                 </label>
-                <div className="relative">
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    onFocus={() => setFocused('email')}
-                    onBlur={() => setFocused(null)}
-                    placeholder="farmer@example.com"
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none transition-all duration-300 font-medium text-gray-900 placeholder-gray-400"
-                    style={{
-                      boxShadow:
-                        focused === 'email'
-                          ? '0 0 20px rgba(16, 185, 129, 0.5), 0 0 40px rgba(16, 185, 129, 0.3), inset 0 0 10px rgba(16, 185, 129, 0.1)'
-                          : 'none',
-                      borderColor: focused === 'email' ? '#10b981' : '#d1d5db',
-                    }}
-                  />
-                </div>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  onFocus={() => setFocused('email')}
+                  onBlur={() => setFocused(null)}
+                  placeholder="demo@farmer.com"
+                  className={`w-full px-4 py-3 border-2 rounded-xl focus:outline-none transition-all duration-300 ${
+                    theme === 'dark'
+                      ? 'bg-black border-gray-700 text-white placeholder-gray-600 focus:border-emerald-500'
+                      : 'bg-white border-gray-300 text-gray-900 placeholder-gray-400 focus:border-emerald-500'
+                  }`}
+                  style={{ boxShadow: focused === 'email' ? '0 0 0 3px rgba(16, 185, 129, 0.1)' : 'none' }}
+                />
               </div>
 
-              {/* Password Field */}
-              <div
-                className="space-y-2"
-                style={{
-                  animation: 'slideUpForm 0.6s ease-out forwards',
-                  animationDelay: '0.5s',
-                }}
-              >
-                <label className="block text-sm font-bold text-gray-800">
-                  🔒 Password
+              <div>
+                <label className={`block text-sm font-semibold mb-2 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                  Password
                 </label>
-                <div className="relative">
-                  <input
-                    type="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    onFocus={() => setFocused('password')}
-                    onBlur={() => setFocused(null)}
-                    placeholder="Enter your password"
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none transition-all duration-300 font-medium text-gray-900 placeholder-gray-400"
-                    style={{
-                      boxShadow:
-                        focused === 'password'
-                          ? '0 0 20px rgba(13, 148, 136, 0.5), 0 0 40px rgba(13, 148, 136, 0.3), inset 0 0 10px rgba(13, 148, 136, 0.1)'
-                          : 'none',
-                      borderColor: focused === 'password' ? '#0d9488' : '#d1d5db',
-                    }}
-                  />
-                </div>
+                <input
+                  type="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  onFocus={() => setFocused('password')}
+                  onBlur={() => setFocused(null)}
+                  placeholder="••••••••••"
+                  className={`w-full px-4 py-3 border-2 rounded-xl focus:outline-none transition-all duration-300 ${
+                    theme === 'dark'
+                      ? 'bg-black border-gray-700 text-white placeholder-gray-600 focus:border-emerald-500'
+                      : 'bg-white border-gray-300 text-gray-900 placeholder-gray-400 focus:border-emerald-500'
+                  }`}
+                  style={{ boxShadow: focused === 'password' ? '0 0 0 3px rgba(16, 185, 129, 0.1)' : 'none' }}
+                />
               </div>
 
-              {/* Error Message */}
               {error && (
-                <div
-                  className="bg-red-50 border-l-4 border-red-500 p-4 text-red-700 text-sm rounded-lg font-semibold"
-                  style={{
-                    animation: 'slideDownError 0.5s ease-out forwards',
-                    boxShadow: '0 0 15px rgba(239, 68, 68, 0.2)',
-                  }}
-                >
+                <div className="bg-red-500/10 border border-red-500/50 text-red-400 p-3 rounded-lg text-sm">
                   ⚠️ {error}
                 </div>
               )}
 
-              {/* Submit Button */}
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full relative group overflow-hidden rounded-xl"
-                style={{
-                  animation: 'slideUpForm 0.6s ease-out forwards',
-                  animationDelay: '0.6s',
-                }}
+                className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold py-3.5 rounded-xl transition-all duration-300 disabled:opacity-50 shadow-lg shadow-emerald-500/30 flex items-center justify-center gap-2"
               >
-                {/* Glow background */}
-                <div
-                  className="absolute inset-0 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 opacity-75 group-hover:opacity-100 blur-lg transition-all duration-300"
-                  style={{
-                    animation: 'buttonGradientShift 4s ease infinite',
-                    backgroundSize: '200% 100%',
-                  }}
-                ></div>
-
-                {/* Button Content */}
-                <div
-                  className="relative bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 group-hover:shadow-2xl"
-                  style={{
-                    boxShadow: focused ? '0 0 20px rgba(16, 185, 129, 0.5)' : 'none',
-                  }}
-                >
-                  {loading ? (
-                    <>
-                      <span
-                        className="w-5 h-5 border-3 border-white/30 border-t-white rounded-full"
-                        style={{
-                          animation: 'spin 0.8s linear infinite',
-                        }}
-                      ></span>
-                      <span>Logging in...</span>
-                    </>
-                  ) : (
-                    <>
-                      <span>🚀</span>
-                      <span>Login to Dashboard</span>
-                    </>
-                  )}
-                </div>
+                {loading ? (
+                  <>
+                    <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+                    <span>Logging in...</span>
+                  </>
+                ) : (
+                  <span>Login to Dashboard</span>
+                )}
               </button>
             </form>
 
-            {/* Divider */}
-            <div
-              className="relative flex items-center gap-4"
-              style={{
-                animation: 'slideUpForm 0.6s ease-out forwards',
-                animationDelay: '0.7s',
-              }}
-            >
-              <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent rotate-divider"></div>
-              <span className="text-xs text-gray-500 font-bold uppercase tracking-widest">Or</span>
-              <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent rotate-divider"></div>
-            </div>
-
-            {/* Register Link */}
-            <div
-              className="text-center pt-2"
-              style={{
-                animation: 'slideUpForm 0.6s ease-out forwards',
-                animationDelay: '0.8s',
-              }}
-            >
-              <p className="text-gray-700 text-sm font-medium">
+            <div className="text-center mt-6">
+              <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
                 Don't have an account?{' '}
-                <Link
-                  to="/register"
-                  className="font-bold transition-all duration-300 relative inline-block group"
-                  style={{
-                    background: 'linear-gradient(135deg, #10b981, #0d9488, #06b6d4)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
-                  }}
-                >
+                <Link to="/register" className="text-emerald-500 hover:text-emerald-400 font-semibold transition-colors">
                   Register here
-                  <span
-                    className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-emerald-500 to-cyan-500 group-hover:w-full transition-all duration-300"
-                    style={{
-                      width: '0%',
-                    }}
-                  ></span>
                 </Link>
               </p>
             </div>
           </div>
-
-          {/* Corner Decorations */}
-          <div
-            className="absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br from-emerald-200/10 to-transparent rounded-lg transform float-corner opacity-50"
-            style={{
-              pointerEvents: 'none',
-            }}
-          ></div>
-          <div
-            className="absolute -bottom-20 -left-20 w-40 h-40 bg-gradient-to-tr from-cyan-200/10 to-transparent rounded-lg transform float-corner opacity-50"
-            style={{
-              pointerEvents: 'none',
-              animationDelay: '1s',
-            }}
-          ></div>
         </div>
+      </div>
 
-        {/* Bottom Branding */}
-        <p
-          className="text-center text-xs text-gray-600 mt-8 font-semibold"
-          style={{
-            animation: 'slideUpForm 0.6s ease-out forwards',
-            animationDelay: '0.9s',
-          }}
-        >
-          🌱 Powered by{' '}
-          <span
-            className="glow-text"
-            style={{
-              background: 'linear-gradient(135deg, #10b981, #0d9488, #06b6d4)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}
-          >
-            Krishi Sakhi
-          </span>{' '}
-          - Smart Farm Assistant
-        </p>
+      {/* Mobile Logo Banner */}
+      <div className={`lg:hidden absolute top-0 left-0 right-0 ${theme === 'dark' ? 'bg-gradient-to-r from-emerald-600 to-teal-600' : 'bg-gradient-to-r from-teal-500 to-emerald-500'} p-4 text-center z-20`}>
+        <div className="flex items-center justify-center gap-2">
+          <span className="text-2xl">🌾</span>
+          <h2 className="text-xl font-black text-white">Krishi Sakhi</h2>
+        </div>
       </div>
     </div>
   );

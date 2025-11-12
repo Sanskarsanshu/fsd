@@ -1,21 +1,16 @@
 import React, { useRef } from 'react';
+import { useTheme } from '../../context/ThemeContext';
 
 const UploadSection = ({ image, isAnalyzing, onUpload }) => {
+  const { theme } = useTheme();
   const fileInputRef = useRef(null);
 
   const handleDragOver = (e) => {
     e.preventDefault();
-    e.currentTarget.classList.add('border-emerald-500', 'bg-emerald-50');
-  };
-
-  const handleDragLeave = (e) => {
-    e.currentTarget.classList.remove('border-emerald-500', 'bg-emerald-50');
   };
 
   const handleDrop = (e) => {
     e.preventDefault();
-    e.currentTarget.classList.remove('border-emerald-500', 'bg-emerald-50');
-    
     const file = e.dataTransfer.files[0];
     if (file && file.type.startsWith('image/')) {
       onUpload(file);
@@ -30,11 +25,19 @@ const UploadSection = ({ image, isAnalyzing, onUpload }) => {
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg overflow-hidden animate-slideUp">
+    <div 
+      className={`rounded-xl shadow-xl overflow-hidden ${
+        theme === 'dark' ? 'bg-zinc-900' : 'bg-white'
+      }`}
+      style={{ animation: 'slideUp 0.6s ease-out' }}
+    >
       <div
-        className="border-2 border-dashed border-gray-300 p-12 text-center transition-all cursor-pointer hover:border-emerald-500"
+        className={`border-2 border-dashed p-8 sm:p-12 text-center transition-all cursor-pointer ${
+          theme === 'dark'
+            ? 'border-gray-700 hover:border-emerald-500 hover:bg-emerald-900/10'
+            : 'border-gray-300 hover:border-emerald-500 hover:bg-emerald-50'
+        }`}
         onDragOver={handleDragOver}
-        onDragLeave={handleDragLeave}
         onDrop={handleDrop}
         onClick={() => fileInputRef.current?.click()}
       >
@@ -43,11 +46,14 @@ const UploadSection = ({ image, isAnalyzing, onUpload }) => {
             <img
               src={URL.createObjectURL(image)}
               alt="preview"
-              className="w-full h-64 object-cover rounded-lg"
+              className="w-full h-48 sm:h-64 object-cover rounded-lg"
             />
             <button
-              onClick={() => fileInputRef.current?.click()}
-              className="px-6 py-2 bg-emerald-500 text-white font-semibold rounded-lg hover:bg-emerald-600 transition-colors"
+              onClick={(e) => {
+                e.stopPropagation();
+                fileInputRef.current?.click();
+              }}
+              className="px-6 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all text-sm"
             >
               Change Image
             </button>
@@ -57,15 +63,35 @@ const UploadSection = ({ image, isAnalyzing, onUpload }) => {
             <div className="inline-block">
               <div className="w-12 h-12 border-4 border-emerald-200 border-t-emerald-500 rounded-full animate-spin"></div>
             </div>
-            <p className="text-lg font-semibold text-gray-700">Analyzing image...</p>
-            <p className="text-sm text-gray-600">Please wait while we scan for pests and diseases</p>
+            <p className={`text-base sm:text-lg font-semibold ${
+              theme === 'dark' ? 'text-white' : 'text-gray-700'
+            }`}>
+              Analyzing image...
+            </p>
+            <p className={`text-xs sm:text-sm ${
+              theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+            }`}>
+              Scanning for pests and diseases
+            </p>
           </div>
         ) : (
           <div className="space-y-4">
-            <div className="text-5xl">📸</div>
-            <p className="text-lg font-semibold text-gray-900">Upload Plant Image</p>
-            <p className="text-gray-600">Drag and drop or click to select</p>
-            <p className="text-xs text-gray-500">PNG, JPG up to 10MB</p>
+            <div className="text-4xl sm:text-5xl">📸</div>
+            <p className={`text-base sm:text-lg font-semibold ${
+              theme === 'dark' ? 'text-white' : 'text-gray-900'
+            }`}>
+              Upload Plant Image
+            </p>
+            <p className={`text-sm ${
+              theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+            }`}>
+              Drag and drop or click to select
+            </p>
+            <p className={`text-xs ${
+              theme === 'dark' ? 'text-gray-500' : 'text-gray-500'
+            }`}>
+              PNG, JPG up to 10MB
+            </p>
           </div>
         )}
         <input
