@@ -90,24 +90,97 @@ export const MOCK_DATA = {
   schemes: [
     {
       id: 1,
-      title: 'Pradhan Mantri Kisan Samman Nidhi',
-      description: 'Provides income support to all landholding farmer families.',
-      eligibility: 'All Farmers',
-      amount: '₹6,000 per annum',
-      details: 'A central government income support scheme providing ₹6,000 per annum.',
-      documents: ['Aadhaar card', 'Proof of citizenship', 'Land ownership documents'],
-      link: 'https://pmkisan.gov.in/'
+      title: "PM-KISAN",
+      description: "Direct income support to all landholding farmers",
+      eligibility: "All landholding farmers",
+      amount: "₹6,000/year",
+      details: "Pradhan Mantri Kisan Samman Nidhi (PM-KISAN) provides income support to all landholding farmers' families across the country. The amount is paid in three equal installments of ₹2,000 each every four months.",
+      documents: [
+        "Aadhaar Card",
+        "Bank Account Details",
+        "Land Ownership Documents",
+        "Mobile Number linked to Aadhaar"
+      ],
+      link: "https://pmkisan.gov.in/"
     },
     {
       id: 2,
-      title: 'Kisan Credit Card (KCC)',
-      description: 'Offers credit to farmers for their farming needs.',
-      eligibility: 'Farmers, Fishermen',
-      amount: 'Up to ₹3,00,000',
-      details: 'A credit scheme to provide farmers with timely, low-cost credit.',
-      documents: ['KCC form', 'Identity proof', 'Land documents'],
-      link: 'https://www.sbi.co.in/'
+      title: "Soil Health Card Scheme",
+      description: "Free soil testing and health cards for farmers",
+      eligibility: "All farmers with agricultural land",
+      amount: "Free Service",
+      details: "The Soil Health Card Scheme provides farmers with soil nutrient status and recommendations on appropriate dosage of nutrients to improve soil health and fertility. Cards are issued every 2 years.",
+      documents: [
+        "Land Records",
+        "Aadhaar Card",
+        "Farmer Registration Number",
+        "Contact Details"
+      ],
+      link: "https://soilhealth.dac.gov.in/"
     },
+    {
+      id: 3,
+      title: "Pradhan Mantri Fasal Bima Yojana",
+      description: "Comprehensive crop insurance scheme",
+      eligibility: "All farmers growing notified crops",
+      amount: "Up to ₹2 Lakh",
+      details: "PMFBY provides insurance coverage and financial support to farmers in the event of failure of any notified crop as a result of natural calamities, pests, and diseases. Premium rates are very low - 2% for Kharif, 1.5% for Rabi crops.",
+      documents: [
+        "Aadhaar Card",
+        "Bank Account Passbook",
+        "Land Records/Tenancy Agreement",
+        "Sowing Certificate",
+        "Declaration Form"
+      ],
+      link: "https://pmfby.gov.in/"
+    },
+    {
+      id: 4,
+      title: "Kisan Credit Card (KCC)",
+      description: "Easy credit access for agricultural needs",
+      eligibility: "Farmers, sharecroppers, tenant farmers",
+      amount: "Up to ₹3 Lakh",
+      details: "Kisan Credit Card provides adequate and timely credit support to farmers for their cultivation and other needs. Interest subvention of 2% is available. Comes with accidental insurance cover of ₹50,000 and term insurance up to ₹50,000.",
+      documents: [
+        "Land Documents",
+        "Aadhaar Card",
+        "PAN Card",
+        "Passport Size Photos",
+        "Bank Account Statement"
+      ],
+      link: "https://www.india.gov.in/spotlight/kisan-credit-card-kcc"
+    },
+    {
+      id: 5,
+      title: "National Agriculture Market (e-NAM)",
+      description: "Online trading platform for agricultural commodities",
+      eligibility: "All farmers with produce to sell",
+      amount: "Better Market Prices",
+      details: "e-NAM is a pan-India electronic trading portal which networks existing APMC mandis to create a unified national market for agricultural commodities. Farmers can get better prices through transparent auction process and reduced marketing costs.",
+      documents: [
+        "Aadhaar Card",
+        "Bank Account Details",
+        "Mobile Number",
+        "Land Records (for registration)"
+      ],
+      link: "https://www.enam.gov.in/"
+    },
+    {
+      id: 6,
+      title: "PM Kisan Maandhan Yojana",
+      description: "Pension scheme for small and marginal farmers",
+      eligibility: "Small & marginal farmers aged 18-40 years",
+      amount: "₹3,000/month",
+      details: "Pradhan Mantri Kisan Maandhan Yojana is a government-backed contributory pension scheme for small and marginal farmers. Farmers receive ₹3,000 monthly pension after attaining 60 years of age. Monthly contribution ranges from ₹55 to ₹200 based on entry age.",
+      documents: [
+        "Aadhaar Card",
+        "Bank Account Passbook/Cheque",
+        "Land Documents",
+        "Age Proof",
+        "IFSC Code"
+      ],
+      link: "https://maandhan.in/"
+    }
   ],
   articles: [
     {
