@@ -1,6 +1,6 @@
 import React from 'react';
 
-const FeaturesSection = () => {
+const FeaturesSection = ({ theme }) => {
   const features = [
     {
       icon: '🌤️',
@@ -41,12 +41,20 @@ const FeaturesSection = () => {
   ];
 
   return (
-    <section className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 bg-white/50 backdrop-blur-sm rounded-3xl my-20">
+    <section className={`relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 rounded-3xl my-20 ${
+      theme === 'dark' 
+        ? 'bg-gray-900/50 backdrop-blur-sm' 
+        : 'bg-white/50 backdrop-blur-sm'
+    }`}>
       <div className="text-center mb-16 animate-slideUp">
-        <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
+        <h2 className={`text-4xl md:text-5xl font-black mb-4 ${
+          theme === 'dark' ? 'text-white' : 'text-gray-900'
+        }`}>
           Powerful Features for Modern Farmers
         </h2>
-        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+        <p className={`text-xl max-w-2xl mx-auto ${
+          theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+        }`}>
           Everything you need to succeed in farming is here
         </p>
       </div>
@@ -55,7 +63,11 @@ const FeaturesSection = () => {
         {features.map((feature, index) => (
           <div
             key={index}
-            className="bg-white rounded-2xl shadow-lg p-8 card-hover animate-slideUp relative overflow-hidden group"
+            className={`rounded-2xl shadow-lg p-8 card-hover animate-slideUp relative overflow-hidden group transition-all duration-300 ${
+              theme === 'dark' 
+                ? 'bg-gray-800 hover:bg-gray-700' 
+                : 'bg-white hover:shadow-2xl'
+            }`}
             style={{ animationDelay: `${index * 0.1}s` }}
           >
             {/* Gradient background */}
@@ -67,8 +79,14 @@ const FeaturesSection = () => {
               <div className="text-5xl mb-4 transform group-hover:scale-110 transition-transform">
                 {feature.icon}
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">{feature.title}</h3>
-              <p className="text-gray-600">{feature.description}</p>
+              <h3 className={`text-xl font-bold mb-2 ${
+                theme === 'dark' ? 'text-white' : 'text-gray-900'
+              }`}>
+                {feature.title}
+              </h3>
+              <p className={theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}>
+                {feature.description}
+              </p>
             </div>
 
             {/* Glow effect on hover */}

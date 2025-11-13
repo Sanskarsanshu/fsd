@@ -5,8 +5,11 @@ import './index.css'
 import './styles/animations.css'
 import './styles/particles.css'
 
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+    {/* <ThemeProvider> */}
+  <App />
+{/* </ThemeProvider> */}
+  </React.StrictMode>
 )
