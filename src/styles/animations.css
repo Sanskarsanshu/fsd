@@ -1,0 +1,353 @@
+/* Advanced animations and effects */
+
+/* Floating animation */
+@keyframes floating {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Heartbeat animation */
+@keyframes heartbeat {
+  0% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.3);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.3);
+  }
+  70% {
+    transform: scale(1);
+  }
+}
+
+/* Blinking animation */
+@keyframes blink {
+  0%, 50%, 100% {
+    opacity: 1;
+  }
+  25%, 75% {
+    opacity: 0.5;
+  }
+}
+
+/* Smooth color transition */
+@keyframes colorShift {
+  0% {
+    background-color: #10b981;
+  }
+  50% {
+    background-color: #059669;
+  }
+  100% {
+    background-color: #10b981;
+  }
+}
+
+/* Border glow effect */
+@keyframes borderGlow {
+  0% {
+    box-shadow: 0 0 5px rgba(16, 185, 129, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(16, 185, 129, 0.5);
+  }
+}
+
+/* Scale pulse animation */
+@keyframes scalePulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+}
+
+/* Rotate animation */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Slide and fade in */
+@keyframes slideInFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Wave animation */
+@keyframes wave {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  10% {
+    transform: rotateZ(14deg);
+  }
+  20% {
+    transform: rotateZ(-8deg);
+  }
+  30% {
+    transform: rotateZ(14deg);
+  }
+  40% {
+    transform: rotateZ(-4deg);
+  }
+  50% {
+    transform: rotateZ(10deg);
+  }
+  60% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(0deg);
+  }
+}
+
+/* Bounce in animation */
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Fade out and disappear */
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+/* Typewriter effect */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* Zig zag animation */
+@keyframes zigzag {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+}
+
+/* Classes using animations */
+.animate-floating {
+  animation: floating 3s ease-in-out infinite;
+}
+
+.animate-heartbeat {
+  animation: heartbeat 1.3s ease-in-out infinite;
+}
+
+.animate-blink {
+  animation: blink 1s ease-in-out infinite;
+}
+
+.animate-color-shift {
+  animation: colorShift 3s ease-in-out infinite;
+}
+
+.animate-border-glow {
+  animation: borderGlow 2s ease-in-out infinite;
+}
+
+.animate-scale-pulse {
+  animation: scalePulse 2s ease-in-out infinite;
+}
+
+.animate-rotate {
+  animation: rotate 20s linear infinite;
+}
+
+.animate-slide-fade-in {
+  animation: slideInFadeIn 0.5s ease-out;
+}
+
+.animate-wave {
+  animation: wave 0.5s ease-in-out;
+}
+
+.animate-bounce-in {
+  animation: bounceIn 0.6s ease-out;
+}
+
+.animate-fade-out {
+  animation: fadeOut 0.5s ease-out;
+}
+
+.animate-typing {
+  animation: typing 3.5s steps(40, end);
+}
+
+.animate-zigzag {
+  animation: zigzag 0.5s ease-in-out;
+}
+
+/* animations.css */
+
+/* Define CSS variables for theme colors */
+:root {
+  --floating-bg-1: rgba(16, 185, 129, 0.2);
+  --floating-bg-2: rgba(20, 184, 166, 0.2);
+  --floating-bg-3: rgba(6, 182, 212, 0.2);
+  --nav-overlay-bg: rgba(0, 0, 0, 0.5);
+}
+
+.dark {
+  --floating-bg-1: rgba(16, 185, 129, 0.1);
+  --floating-bg-2: rgba(20, 184, 166, 0.1);
+  --floating-bg-3: rgba(6, 182, 212, 0.1);
+  --nav-overlay-bg: rgba(0, 0, 0, 0.7);
+}
+
+/* Floating elements */
+.floating-element {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.6;
+  animation: float 20s ease-in-out infinite;
+}
+
+.floating-element-1 {
+  width: 300px;
+  height: 300px;
+  background: var(--floating-bg-1);
+  top: 10%;
+  left: 5%;
+  animation-delay: 0s;
+}
+
+.floating-element-2 {
+  width: 400px;
+  height: 400px;
+  background: var(--floating-bg-2);
+  bottom: 15%;
+  right: 10%;
+  animation-delay: 5s;
+}
+
+.floating-element-3 {
+  width: 250px;
+  height: 250px;
+  background: var(--floating-bg-3);
+  top: 50%;
+  right: 20%;
+  animation-delay: 10s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate(20px, -20px) rotate(90deg);
+  }
+  50% {
+    transform: translate(-10px, 10px) rotate(180deg);
+  }
+  75% {
+    transform: translate(15px, 15px) rotate(270deg);
+  }
+}
+
+/* Navigation overlay */
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--nav-overlay-bg);
+  backdrop-filter: blur(4px);
+  z-index: 40;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.nav-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Slide down animation */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slideDown {
+  animation: slideDown 0.5s ease-out forwards;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #10b981 0%, #0d9488 50%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Dark mode gradient text adjustment */
+.dark .gradient-text {
+  background: linear-gradient(135deg, #34d399 0%, #14b8a6 50%, #22d3ee 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}

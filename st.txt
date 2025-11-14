@@ -1,0 +1,99 @@
+src/
+├── components/
+│   ├── Landing/
+│   │   ├── Landing.jsx (NEW)
+│   │   ├── HeroSection.jsx (NEW)
+│   │   ├── FeaturesSection.jsx (NEW)
+│   │   └── CTASection.jsx (NEW)
+│   ├── Auth/
+│   │   ├── Login.jsx (UPDATED)
+│   │   ├── Register.jsx (UPDATED)
+│   │   └── AuthGuard.jsx
+│   ├── Layout/
+│   │   ├── Sidebar.jsx (FIXED)
+│   │   ├── Header.jsx (FIXED)
+│   │   └── MainLayout.jsx (FIXED)
+│   └── ... (other components unchanged)
+├── App.jsx (UPDATED)
+└── index.css (UPDATED)
+krishi-sakhi/
+├── public/
+│   ├── figure1.png
+│   ├── figure2.png
+│   └── figure3.png
+├── src/
+│   ├── components/
+│   │   ├── Auth/
+│   │   │   ├── Login.jsx
+│   │   │   ├── Register.jsx
+│   │   │   └── AuthGuard.jsx
+│   │   ├── Dashboard/
+│   │   │   ├── Dashboard.jsx
+│   │   │   ├── WeatherCard.jsx
+│   │   │   ├── FarmConditions.jsx
+│   │   │   ├── YieldPrediction.jsx
+│   │   │   ├── MarketPrices.jsx
+│   │   │   ├── AISuggestions.jsx
+│   │   │   └── UpcomingTasks.jsx
+│   │   ├── Financials/
+│   │   │   ├── Financials.jsx
+│   │   │   ├── SummaryCards.jsx
+│   │   │   ├── IncomeExpenseChart.jsx
+│   │   │   ├── ExpenseBreakdown.jsx
+│   │   │   ├── TransactionsList.jsx
+│   │   │   ├── LogTransactionModal.jsx
+│   │   │   └── LogActivityModal.jsx
+│   │   ├── PestDetection/
+│   │   │   ├── PestDetection.jsx
+│   │   │   ├── UploadSection.jsx
+│   │   │   ├── AnalysisResult.jsx
+│   │   │   └── History.jsx
+│   │   ├── Marketplace/
+│   │   │   ├── Marketplace.jsx
+│   │   │   └── BuyerCard.jsx
+│   │   ├── KnowledgeHub/
+│   │   │   ├── KnowledgeHub.jsx
+│   │   │   ├── ArticleCard.jsx
+│   │   │   └── ArticleModal.jsx
+│   │   ├── Schemes/
+│   │   │   ├── Schemes.jsx
+│   │   │   ├── SchemeCard.jsx
+│   │   │   └── SchemeModal.jsx
+│   │   ├── Community/
+│   │   │   ├── Community.jsx
+│   │   │   └── PostCard.jsx
+│   │   ├── Layout/
+│   │   │   ├── Sidebar.jsx
+│   │   │   ├── Header.jsx
+│   │   │   ├── MainLayout.jsx
+│   │   │   └── FAB.jsx
+│   │   ├── Shared/
+│   │   │   ├── Loader.jsx
+│   │   │   ├── Toast.jsx
+│   │   │   ├── Modal.jsx
+│   │   │   └── ParticlesBg.jsx
+│   │   └── Future/
+│   │       └── FutureFeatures.jsx
+│   ├── hooks/
+│   │   ├── useToast.js
+│   │   ├── useAuth.js
+│   │   └── useLocalStorage.js
+│   ├── context/
+│   │   └── AuthContext.jsx
+│   ├── data/
+│   │   └── mockData.js
+│   ├── utils/
+│   │   └── helpers.js
+│   ├── styles/
+│   │   ├── animations.css
+│   │   ├── particles.css
+│   │   └── tailwind.css
+│   ├── App.jsx
+│   ├── main.jsx
+│   └── index.css
+├── .env
+├── index.html
+├── package.json
+├── tailwind.config.js
+├── postcss.config.js
+└── vite.config.js

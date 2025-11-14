@@ -1,0 +1,130 @@
+@import "tailwindcss";
+@theme {
+  --color-dark-bg: #0f172a;
+  --color-dark-surface: #1e293b;
+}
+/* 3D Perspective Animations */
+@keyframes rotate3D {
+  0% { transform: rotateX(0) rotateY(0) translateZ(0); }
+  50% { transform: rotateX(5deg) rotateY(5deg) translateZ(20px); }
+  100% { transform: rotateX(0) rotateY(0) translateZ(0); }
+}
+
+@keyframes tiltX {
+  0%, 100% { transform: perspective(1000px) rotateX(0deg); }
+  50% { transform: perspective(1000px) rotateX(10deg); }
+}
+
+@keyframes tiltY {
+  0%, 100% { transform: perspective(1000px) rotateY(0deg); }
+  50% { transform: perspective(1000px) rotateY(10deg); }
+}
+
+@keyframes neon-glow {
+  0%, 100% { 
+    box-shadow: 0 0 5px rgba(16, 185, 129, 0.5), 
+                0 0 15px rgba(16, 185, 129, 0.3);
+    text-shadow: 0 0 5px rgba(16, 185, 129, 0.5);
+  }
+  50% { 
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.8), 
+                0 0 35px rgba(16, 185, 129, 0.5);
+    text-shadow: 0 0 20px rgba(16, 185, 129, 0.8);
+  }
+}
+
+@keyframes glitch-skew {
+  20% { transform: skew(2deg); }
+  40% { transform: skew(-2deg); }
+  60% { transform: skew(1deg); }
+  80% { transform: skew(-1deg); }
+  100% { transform: skew(0deg); }
+}
+
+@keyframes scan-line {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+@keyframes particles-float {
+  0% { transform: translate(0, 0) scale(1); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+}
+
+@keyframes aurora {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes liquid-wave {
+  0% { transform: translateX(0) translateY(0); }
+  25% { transform: translateX(10px) translateY(-5px); }
+  50% { transform: translateX(0) translateY(-10px); }
+  75% { transform: translateX(-10px) translateY(-5px); }
+  100% { transform: translateX(0) translateY(0); }
+}
+
+@keyframes data-pulse {
+  0%, 100% { 
+    background-color: rgba(16, 185, 129, 0.1);
+    transform: scale(1);
+  }
+  50% { 
+    background-color: rgba(16, 185, 129, 0.3);
+    transform: scale(1.05);
+  }
+}
+
+@keyframes hologram {
+  0% { 
+    transform: perspective(1000px) rotateZ(0deg);
+    opacity: 0.8;
+    filter: hue-rotate(0deg);
+  }
+  50% { 
+    transform: perspective(1000px) rotateZ(2deg);
+    opacity: 1;
+    filter: hue-rotate(5deg);
+  }
+  100% { 
+    transform: perspective(1000px) rotateZ(0deg);
+    opacity: 0.8;
+    filter: hue-rotate(0deg);
+  }
+}
+
+.animate-rotate3D { animation: rotate3D 6s ease-in-out infinite; }
+.animate-tiltX { animation: tiltX 4s ease-in-out infinite; }
+.animate-tiltY { animation: tiltY 4s ease-in-out infinite; }
+.animate-neon-glow { animation: neon-glow 2s ease-in-out infinite; }
+.animate-glitch { animation: glitch-skew 0.3s ease-in-out infinite; }
+.animate-scan { animation: scan-line 3s ease-in-out infinite; }
+.animate-aurora { animation: aurora 4s ease-in-out infinite; }
+.animate-liquid { animation: liquid-wave 3s ease-in-out infinite; }
+.animate-data-pulse { animation: data-pulse 1.5s ease-in-out infinite; }
+.animate-hologram { animation: hologram 3s ease-in-out infinite; }
+
+/* Glass Morphism */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* 3D Perspective */
+.perspective-1000 { perspective: 1000px; }
+.preserve-3d { transform-style: preserve-3d; }
+
+/* Particle Container */
+.particle-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  pointer-events: none;
+}
