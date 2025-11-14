@@ -1,4 +1,5 @@
 /* 3D Perspective Animations */
+@import "tailwindcss";
 @keyframes rotate3D {
   0% { transform: rotateX(0) rotateY(0) translateZ(0); }
   50% { transform: rotateX(5deg) rotateY(5deg) translateZ(20px); }
