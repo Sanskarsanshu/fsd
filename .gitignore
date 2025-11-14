@@ -25,3 +25,30 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+############################################################
+# ML Model Files (Avoid GitHub file-size limit)
+############################################################
+
+# Model weight files (always large)
+*.pth
+*.pt
+*.onnx
+*.ckpt
+*.safetensors
+*.h5
+*.tflite
+*.joblib
+*.pkl
+
+# Training checkpoints
+checkpoints/
+pest_detection/checkpoints/
+pest_detection_backup/
+
+# Training outputs
+**/runs/
+**/outputs/
+**/wandb/
+
+# Last checkpoint files
+last_checkpoint
