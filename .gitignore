@@ -39,16 +39,3 @@ dist-ssr
 *.tflite
 *.joblib
 *.pkl
-
-# Training checkpoints
-checkpoints/
-pest_detection/checkpoints/
-pest_detection_backup/
-
-# Training outputs
-**/runs/
-**/outputs/
-**/wandb/
-
-# Last checkpoint files
-last_checkpoint
