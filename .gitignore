@@ -41,3 +41,5 @@ dist-ssr
 *.tflite
 *.joblib
 *.pkl
+
+backend/.env
