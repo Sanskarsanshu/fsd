@@ -45,7 +45,7 @@ const MainLayout = () => {
   // Render component based on current path
   const renderContent = () => {
     const path = location.pathname;
-    
+
     // Shop routes
     if (path === '/shop') return <Shop onShowToast={handleShowToast} />;
     if (path.startsWith('/shop/product/')) return <ProductDetail onShowToast={handleShowToast} />;
@@ -115,10 +115,10 @@ const MainLayout = () => {
         </main>
       </div>
 
-      {/* FAB Button */}
+      {/* FAB */}
       <FAB />
 
-      {/* Toast Notification */}
+      {/* Toast */}
       <Toast
         show={toast.show}
         message={toast.message}
