@@ -10,7 +10,6 @@ import Marketplace from '../Marketplace/Marketplace';
 import KnowledgeHub from '../KnowledgeHub/KnowledgeHub';
 import Schemes from '../Schemes/Schemes';
 import Community from '../Community/Community';
-// import FutureFeatures from '../Future/FutureFeatures';
 import Shop from '../Shop/Shop';
 import ProductDetail from '../Shop/ProductDetail';
 import Cart from '../Shop/Cart';
@@ -35,7 +34,7 @@ const MainLayout = () => {
   // Render component based on current path
   const renderContent = () => {
     const path = location.pathname;
-    
+
     // Shop routes
     if (path === '/shop') return <Shop onShowToast={handleShowToast} />;
     if (path.startsWith('/shop/product/')) return <ProductDetail onShowToast={handleShowToast} />;
@@ -67,20 +66,25 @@ const MainLayout = () => {
   };
 
   return (
-    <div className={`flex h-screen overflow-hidden transition-colors duration-300 ${
-      theme === 'dark' ? 'bg-black' : 'bg-gray-50'
-    }`}>
-      {/* Sidebar - Always mounted but hidden on mobile */}
+    <div
+      className={`flex min-h-screen overflow-visible transition-colors duration-300 ${
+        theme === 'dark' ? 'bg-black' : 'bg-gray-50'
+      }`}
+    >
+      {/* Sidebar */}
       <Sidebar isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
 
       {/* Main Content Wrapper */}
-      <div className="flex-1 flex flex-col overflow-hidden w-full lg:w-auto">
-        {/* Header - Sticky */}
-        <div className={`sticky top-0 z-20 shadow-sm transition-colors duration-300 ${
-          theme === 'dark' 
-            ? 'bg-zinc-900 border-gray-800' 
-            : 'bg-white border-gray-200'
-        } border-b`}>
+      <div className="flex-1 flex flex-col overflow-visible w-full lg:w-auto">
+
+        {/* Header */}
+        <div
+          className={`sticky top-0 z-20 shadow-sm transition-colors duration-300 ${
+            theme === 'dark'
+              ? 'bg-zinc-900 border-gray-800'
+              : 'bg-white border-gray-200'
+          } border-b`}
+        >
           <Header
             onMenuClick={() => setSidebarOpen(!sidebarOpen)}
             userName={user?.name}
@@ -89,19 +93,21 @@ const MainLayout = () => {
         </div>
 
         {/* Scrollable Main Content */}
-        <main className={`flex-1 overflow-y-auto transition-colors duration-300 ${
-          theme === 'dark' ? 'bg-black' : 'bg-gray-50'
-        }`}>
+        <main
+          className={`flex-1 overflow-y-auto transition-colors duration-300 ${
+            theme === 'dark' ? 'bg-black' : 'bg-gray-50'
+          }`}
+        >
           <div className="w-full min-h-full">
             {renderContent()}
           </div>
         </main>
       </div>
 
-      {/* FAB Button */}
+      {/* FAB */}
       <FAB />
 
-      {/* Toast Notification */}
+      {/* Toast */}
       <Toast
         show={toast.show}
         message={toast.message}
