@@ -182,24 +182,27 @@ export const MOCK_DATA = {
       link: "https://maandhan.in/"
     }
   ],
-  articles: [
-    {
-      id: 1,
-      title: 'Advanced Irrigation Techniques',
-      category: 'Water Management',
-      readTime: 8,
-      image: '💧',
-      excerpt: 'Learn the latest irrigation methods to maximize crop yield...'
-    },
-    {
-      id: 2,
-      title: 'Organic Pest Control',
-      category: 'Pest Control',
-      readTime: 12,
-      image: '🐛',
-      excerpt: 'Natural and organic methods to protect your crops...'
-    },
-  ],
+ articles: [
+  {
+    id: 1,
+    title: 'Advanced Irrigation Techniques',
+    category: 'Water Management',
+    readTime: 8,
+    image: 'https://growhoss.com/cdn/shop/products/Irrigation-8Mil-Kit_460x@2x.jpg?v=1691782933',
+    videoUrl: null, // Add this
+    excerpt: 'Learn the latest irrigation methods to maximize crop yield and water efficiency for sustainable farming...'
+  },
+  {
+    id: 2,
+    title: 'Organic Pest Control',
+    category: 'Pest Control',
+    readTime: 12,
+    image: 'https://glamourgarden.com/wp-content/uploads/2023/06/pest-control-1024x636.jpg',
+    videoUrl: null, // Add this
+    excerpt: 'Natural and organic methods to protect your crops from pests without harmful chemicals...'
+  }
+],
+
   community: [
     { id: 1, user: 'Ramesh K.', post: 'Best organic pesticide for aphids?', replies: 3, likes: 8, avatar: '👨‍🌾' },
     { id: 2, user: 'Sita Menon', post: 'Sharing my tomato harvest photos!', replies: 5, likes: 22, avatar: '👩‍🌾' },
@@ -214,7 +217,7 @@ export const MOCK_DATA = {
       originalPrice: 1200,
       discount: 29,
       unit: '50 kg bag',
-      image: '🌱',
+      image: `https://www.sulzer.com/-/media/images/applications/oil-gas-chemicals/chemical-processing/fertilizers/npk_fertilizers.jp`,
       rating: 4.5,
       reviews: 234,
       inStock: true,
@@ -230,7 +233,7 @@ export const MOCK_DATA = {
       originalPrice: 600,
       discount: 25,
       unit: '40 kg bag',
-      image: '🍂',
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTylDkKTDTLx5h47cXWxn5EHOW_Rc4mR5NEZg&s ',
       rating: 4.7,
       reviews: 189,
       inStock: true,
@@ -246,7 +249,7 @@ export const MOCK_DATA = {
       originalPrice: 380,
       discount: 16,
       unit: '45 kg bag',
-      image: '💧',
+      image: 'https://5.imimg.com/data5/SELLER/Default/2023/9/346419576/GB/CO/UV/181297268/u3-500x500.jpg ',
       rating: 4.3,
       reviews: 456,
       inStock: true,
@@ -262,7 +265,7 @@ export const MOCK_DATA = {
       originalPrice: 350,
       discount: 20,
       unit: '1 liter',
-      image: '🌿',
+      image: 'https://gogarden.co.in/cdn/shop/files/Neem_oil_by_Go_Garden.jpg?v=1741858009',
       rating: 4.6,
       reviews: 312,
       inStock: true,
@@ -278,7 +281,7 @@ export const MOCK_DATA = {
       originalPrice: 52000,
       discount: 13,
       unit: 'piece',
-      image: '🚜',
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNy3Ytimh3q9S-RpLqJTq4GXWAd81KoC99Sw&s',
       rating: 4.8,
       reviews: 89,
       inStock: true,
@@ -294,7 +297,7 @@ export const MOCK_DATA = {
       originalPrice: 4200,
       discount: 17,
       unit: 'piece',
-      image: '💦',
+      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9r9l8Z2Fy2MwTMeOyGOXJGJ5ycLMBu43Mlg&s',
       rating: 4.4,
       reviews: 567,
       inStock: true,
@@ -310,7 +313,7 @@ export const MOCK_DATA = {
       originalPrice: 1600,
       discount: 25,
       unit: 'set',
-      image: '🔧',
+      image: 'https://www.rogersgardens.com/cdn/shop/articles/RG-Gardening-Tools-2.jpg?v=1690393327',
       rating: 4.5,
       reviews: 234,
       inStock: true,
@@ -326,7 +329,7 @@ export const MOCK_DATA = {
       originalPrice: 3500,
       discount: 20,
       unit: 'kit',
-      image: '🚰',
+      image: 'https://elitechdrip.com/wp-content/uploads/2019/07/2022-new-timer-autokit-drip-irrigation-1.jpg',
       rating: 4.7,
       reviews: 178,
       inStock: true,
@@ -342,7 +345,7 @@ export const MOCK_DATA = {
       originalPrice: 200,
       discount: 25,
       unit: 'pack',
-      image: '🌾',
+      image: 'https://organicbazar.net/cdn/shop/files/RainySeasonVegetable_FlowerMixedSeedsKit.jpg?v=1750760699&width=533',
       rating: 4.6,
       reviews: 445,
       inStock: true,
@@ -358,7 +361,7 @@ export const MOCK_DATA = {
       originalPrice: 1100,
       discount: 27,
       unit: 'piece',
-      image: '📊',
+      image: 'https://hannainst.in/wp-content/inline-images/products/testers/application_specific/HI981030_Groline-pH-Tester.jpg ',
       rating: 4.3,
       reviews: 156,
       inStock: true,
@@ -368,6 +371,7 @@ export const MOCK_DATA = {
     },
   ],
 
+ 
   // Product categories
   categories: [
     { id: 'all', name: 'All Products', icon: '📦', count: 10 },

@@ -14,7 +14,7 @@ const Settings = ({ onShowToast }) => {
 
   const tabs = [
     { id: 'profile', name: 'Profile', icon: '👤' },
-    { id: 'account', name: 'Account', icon: '⚙' },
+    { id: 'account', name: 'Account', icon: '⚙️' },
     { id: 'notifications', name: 'Notifications', icon: '🔔' },
     { id: 'feedback', name: 'Feedback', icon: '💬' },
   ];
