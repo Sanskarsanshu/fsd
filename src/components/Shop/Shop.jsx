@@ -8,6 +8,7 @@ import useCartStore from '../../store/cartStore';
 const Shop = () => {
   const { theme } = useTheme();
   const navigate = useNavigate();
+  const isDark = theme === 'dark';
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
   const cartCount = useCartStore((state) => state.getCount());
@@ -32,18 +33,18 @@ const Shop = () => {
   return (
     <>
       <style>{keyframeStyles}</style>
-      <div className={`min-h-screen p-4 sm:p-6 lg:p-8 transition-colors duration-300 ${
-        theme === 'dark' ? 'bg-black' : 'bg-gradient-to-br from-gray-50 via-emerald-50 to-teal-50'
+      <div className={`min-h-screen p-3 sm:p-4 md:p-6 lg:p-8 transition-colors duration-300 ${
+        isDark ? 'bg-black' : 'bg-gradient-to-br from-gray-50 via-emerald-50 to-teal-50'
       }`}>
-        <div className="max-w-7xl mx-auto space-y-6">
+        <div className="max-w-7xl mx-auto space-y-4 sm:space-y-6">
           {/* Header */}
-          <div className="flex items-center justify-between flex-wrap gap-4" style={{ animation: 'slideDown 0.6s ease-out' }}>
+          <div className="flex items-center justify-between flex-wrap gap-3 sm:gap-4" style={{ animation: 'slideDown 0.6s ease-out' }}>
             <div>
-              <h1 className="text-2xl sm:text-3xl font-black bg-gradient-to-r from-emerald-500 to-teal-500 bg-clip-text text-transparent mb-1">
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black bg-gradient-to-r from-emerald-500 to-teal-500 bg-clip-text text-transparent mb-1">
                 Agri Shop
               </h1>
-              <p className={`text-sm font-semibold ${
-                theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
+              <p className={`text-xs sm:text-sm font-semibold ${
+                isDark ? 'text-gray-400' : 'text-gray-600'
               }`}>
                 Buy fertilizers, tools, and supplies
               </p>
@@ -52,11 +53,11 @@ const Shop = () => {
             {/* Cart Button */}
             <button
               onClick={() => navigate('/shop/cart')}
-              className="relative px-4 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold rounded-lg hover:shadow-lg transition-all text-sm sm:text-base"
+              className="relative px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold rounded-lg hover:shadow-lg transition-all text-sm sm:text-base"
             >
               🛒 Cart
               {cartCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center">
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center shadow-lg">
                   {cartCount}
                 </span>
               )}
@@ -70,13 +71,13 @@ const Shop = () => {
               placeholder="Search products..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className={`w-full px-4 sm:px-6 py-3 sm:py-4 border-2 rounded-lg focus:outline-none focus:ring-2 text-sm sm:text-base transition-all ${
-                theme === 'dark'
+              className={`w-full px-4 sm:px-6 py-2.5 sm:py-3 md:py-4 border-2 rounded-lg focus:outline-none focus:ring-2 text-sm sm:text-base transition-all ${
+                isDark
                   ? 'bg-zinc-900 border-gray-700 text-white placeholder-gray-500 focus:border-emerald-500 focus:ring-emerald-500/20'
                   : 'bg-white border-gray-300 text-gray-900 placeholder-gray-400 focus:border-emerald-500 focus:ring-emerald-200'
               }`}
             />
-            <span className="absolute right-4 top-3 sm:top-4 text-xl sm:text-2xl">🔍</span>
+            <span className="absolute right-3 sm:right-4 top-2 sm:top-2.5 md:top-3 text-lg sm:text-xl md:text-2xl">🔍</span>
           </div>
 
           {/* Categories */}
@@ -88,7 +89,7 @@ const Shop = () => {
                 className={`px-3 sm:px-4 py-2 rounded-lg font-semibold whitespace-nowrap transition-all text-xs sm:text-sm ${
                   selectedCategory === cat.id
                     ? 'bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-lg'
-                    : theme === 'dark'
+                    : isDark
                     ? 'bg-zinc-900 text-gray-300 border border-gray-700 hover:border-emerald-500'
                     : 'bg-white text-gray-700 border border-gray-300 hover:border-emerald-500'
                 }`}
@@ -100,11 +101,11 @@ const Shop = () => {
             ))}
           </div>
 
-          {/* Products Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
+          {/* Products Grid - 4 columns on all screens */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 lg:gap-5">
             {filteredProducts.length === 0 ? (
               <div className="col-span-full text-center py-12">
-                <p className={`text-base sm:text-lg ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                <p className={`text-base sm:text-lg ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
                   No products found
                 </p>
               </div>

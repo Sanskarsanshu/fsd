@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useTheme } from '../../context/ThemeContext';
 import Sidebar from './Sidebar';
@@ -10,16 +10,20 @@ import Marketplace from '../Marketplace/Marketplace';
 import KnowledgeHub from '../KnowledgeHub/KnowledgeHub';
 import Schemes from '../Schemes/Schemes';
 import Community from '../Community/Community';
-// import FutureFeatures from '../Future/FutureFeatures';
+import FutureFeatures from '../Future/FutureFeatures';
 import Shop from '../Shop/Shop';
 import ProductDetail from '../Shop/ProductDetail';
 import Cart from '../Shop/Cart';
 import Checkout from '../Shop/Checkout';
 import OrderSuccess from '../Shop/OrderSuccess';
+import Chatbot from '../Contact/Chatbot';
+import ContactEmail from '../Contact/ContactEmail';
+import ContactCall from '../Contact/ContactCall';
 import FAB from './FAB';
 import Toast from '../Shared/Toast';
+import Settings from '../Settings/Settings';
+
 import { useAuth } from '../../hooks/useAuth';
-import FutureFeatures from '../Future/FutureFeatures';
 
 const MainLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -27,6 +31,12 @@ const MainLayout = () => {
   const { user } = useAuth();
   const { theme } = useTheme();
   const location = useLocation();
+  const isDark = theme === 'dark';
+
+  // Close sidebar on route change (mobile)
+  useEffect(() => {
+    setSidebarOpen(false);
+  }, [location.pathname]);
 
   const handleShowToast = (message, type = 'success') => {
     setToast({ show: true, message, type });
@@ -42,6 +52,11 @@ const MainLayout = () => {
     if (path === '/shop/cart') return <Cart onShowToast={handleShowToast} />;
     if (path === '/shop/checkout') return <Checkout onShowToast={handleShowToast} />;
     if (path === '/shop/order-success') return <OrderSuccess onShowToast={handleShowToast} />;
+
+    // Contact routes
+    if (path === '/chatbot') return <Chatbot onShowToast={handleShowToast} />;
+    if (path === '/contact/email') return <ContactEmail onShowToast={handleShowToast} />;
+    if (path === '/contact/call') return <ContactCall onShowToast={handleShowToast} />;
 
     // Other routes
     switch (path) {
@@ -61,6 +76,8 @@ const MainLayout = () => {
         return <Community onShowToast={handleShowToast} />;
       case '/future-features':
         return <FutureFeatures onShowToast={handleShowToast} />;
+      case '/settings':
+        return <Settings onShowToast={handleShowToast} />;
       default:
         return <Dashboard onShowToast={handleShowToast} />;
     }
@@ -68,29 +85,29 @@ const MainLayout = () => {
 
   return (
     <div className={`flex h-screen overflow-hidden transition-colors duration-300 ${
-      theme === 'dark' ? 'bg-black' : 'bg-gray-50'
+      isDark ? 'bg-black' : 'bg-gray-50'
     }`}>
-      {/* Sidebar - Always mounted but hidden on mobile */}
+      {/* Sidebar */}
       <Sidebar isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
 
       {/* Main Content Wrapper */}
-      <div className="flex-1 flex flex-col overflow-hidden w-full lg:w-auto">
+      <div className="flex-1 flex flex-col overflow-hidden min-w-0">
         {/* Header - Sticky */}
         <div className={`sticky top-0 z-20 shadow-sm transition-colors duration-300 ${
-          theme === 'dark' 
+          isDark 
             ? 'bg-zinc-900 border-gray-800' 
             : 'bg-white border-gray-200'
         } border-b`}>
           <Header
             onMenuClick={() => setSidebarOpen(!sidebarOpen)}
-            userName={user?.name}
+            userName={user?.username}
             userEmail={user?.email}
           />
         </div>
 
         {/* Scrollable Main Content */}
         <main className={`flex-1 overflow-y-auto transition-colors duration-300 ${
-          theme === 'dark' ? 'bg-black' : 'bg-gray-50'
+          isDark ? 'bg-black' : 'bg-gray-50'
         }`}>
           <div className="w-full min-h-full">
             {renderContent()}

@@ -71,7 +71,7 @@ const UploadSection = ({ image, isAnalyzing, onUpload }) => {
             <p className={`text-xs sm:text-sm ${
               theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
             }`}>
-              Scanning for pests and diseases
+              AI is scanning for pests and diseases
             </p>
           </div>
         ) : (
